@@ -1,0 +1,28 @@
+#include <iostream>
+
+void print2DArray(int array[][3], int rows, int cols) {
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            std::cout << array[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+int main() {
+    const int rows = 3;
+    const int cols = 3;
+
+    // Инициализация двумерного массива
+    int array[rows][cols] = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
+
+    // Вывод массива на экран
+    std::cout << "Двумерный массив:" << std::endl;
+    print2DArray(array, rows, cols);
+
+    return 0;
+}
