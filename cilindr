@@ -1,0 +1,62 @@
+#include <iostream>
+#include <cmath> // Для M_PI и pow
+
+using namespace std;
+
+// Функция для расчета площади боковой поверхности цилиндра
+double calculateLateralSurfaceArea(double radius, double height) {
+  // Проверка на корректность входных данных
+  if (radius <= 0 || height <= 0) {
+    throw invalid_argument("Радиус и высота должны быть положительными.");
+  }
+  return 2 * M_PI * radius * height;
+}
+
+// Функция для расчета площади основания цилиндра
+double calculateBaseArea(double radius) {
+  // Проверка на корректность входных данных
+  if (radius <= 0) {
+    throw invalid_argument("Радиус должен быть положительным.");
+  }
+  return M_PI * pow(radius, 2);
+}
+
+// Функция для расчета полной площади поверхности цилиндра
+double calculateTotalSurfaceArea(double radius, double height) {
+  // Проверка на корректность входных данных
+  if (radius <= 0 || height <= 0) {
+    throw invalid_argument("Радиус и высота должны быть положительными.");
+  }
+  double lateralArea = calculateLateralSurfaceArea(radius, height);
+  double baseArea = calculateBaseArea(radius);
+  return lateralArea + 2 * baseArea; // 2 основания
+}
+
+int main() {
+  double radius, height;
+
+  cout << "Введите радиус цилиндра: ";
+  cin >> radius;
+
+  cout << "Введите высоту цилиндра: ";
+  cin >> height;
+
+  try {
+    // Расчет и вывод площади боковой поверхности
+    double lateralArea = calculateLateralSurfaceArea(radius, height);
+    cout << "Площадь боковой поверхности: " << lateralArea << endl;
+
+    // Расчет и вывод площади основания
+    double baseArea = calculateBaseArea(radius);
+    cout << "Площадь основания: " << baseArea << endl;
+
+    // Расчет и вывод полной площади поверхности
+    double totalArea = calculateTotalSurfaceArea(radius, height);
+    cout << "Полная площадь поверхности: " << totalArea << endl;
+  } catch (const invalid_argument& e) {
+    cerr << "Ошибка: " << e.what() << endl;
+    return 1; // Возвращаем код ошибки
+  }
+
+  return 0;
+}
